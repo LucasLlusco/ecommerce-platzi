@@ -1,10 +1,10 @@
-import Layout from '../../Components/Layout'
 import React, { useState } from 'react'
+import Layout from '../../Components/Layout'
 import { useAuthContext } from '../../Context/authContext';
 import { Link } from 'react-router-dom';
 
-const SignIn = () => {
-  const { loginUser } = useAuthContext();
+const SignUp = () => { 
+  const { createUser } = useAuthContext();
 
   const [newUser, setNewUser] = useState({
     name: "",
@@ -22,15 +22,13 @@ const SignIn = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if(newUser.name && newUser.password) {
-      loginUser(newUser.name, newUser.password);
+      createUser(newUser.name, newUser.password);
     }
   }
-
-
   return (
     <Layout>
       <div className='flex items-center justify-center relative w-80 mb-6'>
-        <h1 className='font-medium text-xl'>Sign In</h1>
+        <h1 className='font-medium text-xl'>Sign up</h1>
       </div>
       <div className='flex flex-col w-80'>
         <form onSubmit={handleSubmit}>
@@ -49,12 +47,12 @@ const SignIn = () => {
             onChange={handlePassword} 
             className='rounded-lg border border-black w-80 p-2 mb-4 focus:outline-none'            
           />        
-          <button className='bg-black py-3 text-white w-full rounded-lg'>Sign In!</button>
-          <p className='text-center mt-4'>Don’t have an account yet? <Link className='underline' to={"/sign-up"}>sign up here.</Link></p>
+          <button className='bg-black py-3 text-white w-full rounded-lg'>Sign Up!</button>
+          <p className='text-center mt-4'>Already have an account? <Link className='underline' to={"/sign-in"}>sign in here</Link></p>
         </form>
-      </div>    
+      </div>      
     </Layout>
   )
 }
 
-export default SignIn
+export default SignUp

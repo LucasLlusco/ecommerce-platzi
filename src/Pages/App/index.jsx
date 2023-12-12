@@ -1,4 +1,4 @@
-import { useRoutes, BrowserRouter } from 'react-router-dom'
+import { useRoutes, BrowserRouter, Navigate } from 'react-router-dom'
 import { ShoppingCartProvider } from '../../Context'
 import Home from '../Home'
 import MyAccount from '../MyAccount'
@@ -9,21 +9,28 @@ import SignIn from '../SignIn'
 import Navbar from '../../Components/Navbar'
 import CheckoutSideMenu from '../../Components/CheckoutSideMenu'
 import './App.css'
+import SignUp from '../SignUp'
+import { AuthContextProvider, useAuthContext } from '../../Context/authContext'
+import ProtectedRoute from '../../Components/ProtectedRoute'
 
 const AppRoutes = () => {
+  const { currentUser } = useAuthContext();
+
+
   let routes = useRoutes([
     { path: '/', element: <Home /> },
     { path: '/clothes', element: <Home /> },
     { path: '/electronics', element: <Home /> },
     { path: '/furnitures', element: <Home /> },
     { path: '/toys', element: <Home /> },
-    { path: '/othes', element: <Home /> },
-    { path: '/my-account', element: <MyAccount /> },
-    { path: '/my-order', element: <MyOrder /> },
-    { path: '/my-orders', element: <MyOrders /> },
-    { path: '/my-orders/last', element: <MyOrder /> },
-    { path: '/my-orders/:id', element: <MyOrder /> },
-    { path: '/sign-in', element: <SignIn /> },
+    { path: '/others', element: <Home /> },
+    { path: '/my-account', element: <ProtectedRoute><MyAccount/></ProtectedRoute>},
+    { path: '/my-order', element: <ProtectedRoute><MyOrder/></ProtectedRoute> },
+    { path: '/my-orders', element: <ProtectedRoute><MyOrders/></ProtectedRoute>  },
+    { path: '/my-orders/last', element: <ProtectedRoute><MyOrder/></ProtectedRoute> },
+    { path: '/my-orders/:id', element: <ProtectedRoute><MyOrder/></ProtectedRoute> },
+    { path: '/sign-in', element: currentUser ? <Navigate to={"/"} /> : <SignIn /> },
+    { path: '/sign-up', element: currentUser ? <Navigate to={"/"} /> : <SignUp /> },
     { path: '/*', element: <NotFound /> },
   ])
 
@@ -32,13 +39,15 @@ const AppRoutes = () => {
 
 const App = () => {
   return (
-    <ShoppingCartProvider>
-      <BrowserRouter>
-        <AppRoutes />
-        <Navbar />
-        <CheckoutSideMenu />
-      </BrowserRouter>
-    </ShoppingCartProvider>
+    <AuthContextProvider>
+      <ShoppingCartProvider>
+        <BrowserRouter>
+          <AppRoutes />
+          <Navbar />
+          <CheckoutSideMenu />
+        </BrowserRouter>
+      </ShoppingCartProvider>
+    </AuthContextProvider>
   )
 }
 

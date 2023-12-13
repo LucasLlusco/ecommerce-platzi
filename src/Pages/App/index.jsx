@@ -18,12 +18,12 @@ const AppRoutes = () => {
 
 
   let routes = useRoutes([
-    { path: '/', element: <Home /> },
-    { path: '/clothes', element: <Home /> },
-    { path: '/electronics', element: <Home /> },
-    { path: '/furnitures', element: <Home /> },
-    { path: '/toys', element: <Home /> },
-    { path: '/others', element: <Home /> },
+    { path: '/', element: <ProtectedRoute><Home /></ProtectedRoute>},
+    { path: '/clothes', element: <ProtectedRoute><Home/></ProtectedRoute>},
+    { path: '/electronics', element: <ProtectedRoute><Home/></ProtectedRoute> },
+    { path: '/furnitures', element: <ProtectedRoute><Home/></ProtectedRoute>},
+    { path: '/toys', element: <ProtectedRoute><Home/></ProtectedRoute>  },
+    { path: '/others', element: <ProtectedRoute><Home/></ProtectedRoute> },
     { path: '/my-account', element: <ProtectedRoute><MyAccount/></ProtectedRoute>},
     { path: '/my-order', element: <ProtectedRoute><MyOrder/></ProtectedRoute> },
     { path: '/my-orders', element: <ProtectedRoute><MyOrders/></ProtectedRoute>  },

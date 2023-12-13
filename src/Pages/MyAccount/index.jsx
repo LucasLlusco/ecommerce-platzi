@@ -13,7 +13,7 @@ function MyAccount() {
       <div className='flex items-center justify-center relative w-80 mb-6'>
         <h1 className='font-medium text-xl'>My account</h1>
       </div>
-      <div className='flex flex-col w-80'>
+      <div className='flex flex-col w-full sm:w-80 px-2'>
         <div className='mb-1 flex gap-1'>
           <p className='font-medium'>name:</p>
           <p>{currentUser.name}</p>

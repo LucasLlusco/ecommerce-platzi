@@ -23,7 +23,7 @@ const AppRoutes = () => {
     { path: '/clothes', element: <ProtectedRoute><Home/></ProtectedRoute>},
     { path: '/electronics', element: <ProtectedRoute><Home/></ProtectedRoute> },
     { path: '/furnitures', element: <ProtectedRoute><Home/></ProtectedRoute>},
-    { path: '/toys', element: <ProtectedRoute><Home/></ProtectedRoute>  },
+    { path: '/shoes', element: <ProtectedRoute><Home/></ProtectedRoute>  },
     { path: '/others', element: <ProtectedRoute><Home/></ProtectedRoute> },
     { path: '/my-account', element: <ProtectedRoute><MyAccount/></ProtectedRoute>},
     { path: '/my-account/edit', element: <ProtectedRoute><EditProfile/></ProtectedRoute>},

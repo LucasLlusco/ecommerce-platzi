@@ -1,25 +1,26 @@
-import { useContext } from 'react'
 import { PlusIcon, CheckIcon } from '@heroicons/react/24/solid'
-import { ShoppingCartContext } from '../../Context'
+import { useShoppingCartContext } from '../../Context/shoppingCartContext'
 
 const Card = (data) => {
-  const context = useContext(ShoppingCartContext)
+
+  const { openProductDetail, setProductToShow, count, setCount, 
+    setCartProducts, cartProducts, openCheckoutSideMenu, closeProductDetail } = useShoppingCartContext();
 
   const showProduct = (productDetail) => {
-    context.openProductDetail()
-    context.setProductToShow(productDetail)
+    openProductDetail()
+    setProductToShow(productDetail)
   }
 
   const addProductsToCart = (event, productData) => {
     event.stopPropagation()
-    context.setCount(context.count + 1)
-    context.setCartProducts([...context.cartProducts, productData])
-    context.openCheckoutSideMenu()
-    context.closeProductDetail()
+    setCount(count + 1)
+    setCartProducts([...cartProducts, productData])
+    openCheckoutSideMenu()
+    closeProductDetail()
   }
 
   const renderIcon = (id) => {
-    const isInCart = context.cartProducts.filter(product => product.id === id).length > 0
+    const isInCart = cartProducts.filter(product => product.id === id).length > 0
 
     if (isInCart) {
       return (

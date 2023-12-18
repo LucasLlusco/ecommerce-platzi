@@ -1,6 +1,6 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect, useContext } from 'react'
 
-export const ShoppingCartContext = createContext()
+const ShoppingCartContext = createContext()
 
 export const ShoppingCartProvider = ({children}) => {
   // Shopping Cart · Increment quantity
@@ -101,5 +101,9 @@ export const ShoppingCartProvider = ({children}) => {
       {children}
     </ShoppingCartContext.Provider>
   )
+}
+
+export const useShoppingCartContext = () => {
+  return useContext(ShoppingCartContext);
 }
 

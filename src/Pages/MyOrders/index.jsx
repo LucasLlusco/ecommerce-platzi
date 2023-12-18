@@ -1,11 +1,10 @@
-import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Layout from '../../Components/Layout'
-import { ShoppingCartContext } from '../../Context'
 import OrdersCard from '../../Components/OrdersCard'
+import { useShoppingCartContext } from '../../Context/shoppingCartContext'
 
 function MyOrders() {
-  const context = useContext(ShoppingCartContext)
+  const { order } = useShoppingCartContext();
 
   return (
     <Layout>
@@ -14,7 +13,7 @@ function MyOrders() {
       </div>
       <div className='flex flex-col w-full sm:w-80 px-2'>
       {
-        context.order.map((order, index) => (
+        order.map((order, index) => (
           <Link key={index} to={`/my-orders/${index}`}>
             <OrdersCard
               totalPrice={order.totalPrice}

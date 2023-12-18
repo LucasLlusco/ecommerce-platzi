@@ -1,5 +1,4 @@
 import { useRoutes, BrowserRouter, Navigate } from 'react-router-dom'
-import { ShoppingCartProvider } from '../../Context'
 import Home from '../Home'
 import MyAccount from '../MyAccount'
 import MyOrder from '../MyOrder'
@@ -13,6 +12,7 @@ import SignUp from '../SignUp'
 import { AuthContextProvider, useAuthContext } from '../../Context/authContext'
 import ProtectedRoute from '../../Components/ProtectedRoute'
 import EditProfile from '../EditProfile'
+import { ShoppingCartProvider } from '../../Context/shoppingCartContext'
 
 const AppRoutes = () => {
   const { currentUser } = useAuthContext();

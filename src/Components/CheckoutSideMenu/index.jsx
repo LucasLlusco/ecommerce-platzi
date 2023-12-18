@@ -16,8 +16,17 @@ const CheckoutSideMenu = () => {
   }
 
   const handleCheckout = () => {
+    const date = new Date();
+
+    const fullDate = date.toLocaleDateString('en-GB'); 
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const fullTime = `${hours}h ${minutes}min`
+
+    const orderDate = `${fullDate} - ${fullTime}`;
+
     const orderToAdd = {
-      date: '01.02.23',
+      date: orderDate,
       products: cartProducts,
       totalProducts: cartProducts.length,
       totalPrice: totalPrice(cartProducts)

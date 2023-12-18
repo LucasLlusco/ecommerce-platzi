@@ -1,4 +1,5 @@
-import { createContext, useState, useEffect, useContext } from 'react'
+import { createContext, useState, useContext } from 'react'
+import { v4 as uuidv4} from 'uuid';
 
 const UserContext = createContext();
 
@@ -11,15 +12,22 @@ export const AuthContextProvider = ({children}) => {
     localStorage.setItem('shopi_users', stringifiedItem);
   }
 
-  const createUser = (name, password) => {
-    const userExist = users.find((user) => user.name === name);
+  const createUser = (name, email, password) => {
+    const userExist = users.find((user) => user.email === email);
     if(userExist) {
       console.log("user already exists!")
     } else {
+      const newUserId = uuidv4()
+      const newUser = {
+        name: name, 
+        email: email, 
+        password:password, 
+        id: newUserId
+      }
       let usersInLocal = [...users];
-      usersInLocal.push({name: name, password:password});
+      usersInLocal.push(newUser);
       saveLocal(usersInLocal)
-      setCurrentUser({name: name, password:password});      
+      setCurrentUser(newUser);      
     }
   }
 
@@ -28,15 +36,32 @@ export const AuthContextProvider = ({children}) => {
   }
 
   
-  const loginUser = (name, password) => {
-    const userExist = users.find((user) => user.name === name);
+  const loginUser = (email, password) => {
+    const userExist = users.find((user) => user.email === email && user.password === password);
 
     if(userExist) {
-      setCurrentUser({name: name, password: password});
+      setCurrentUser(userExist);
     } else {
       console.log("user doesnt exists!")
-      //return false;
     }
+  }
+
+  const editUser = (newName, newEmail, newPassword) => {
+    const updatedUser = {
+      name: newName, 
+      email: newEmail,
+      password: newPassword,
+      id: currentUser.id
+    }
+
+    const userIndex = users.findIndex((user => user.id === currentUser.id));
+    let usersInLocal = [...users];
+    usersInLocal[userIndex].name = updatedUser.name
+    usersInLocal[userIndex].email = updatedUser.email
+    usersInLocal[userIndex].password = updatedUser.password
+    
+    saveLocal(usersInLocal)
+    setCurrentUser(updatedUser);
   }
 
 
@@ -46,7 +71,8 @@ export const AuthContextProvider = ({children}) => {
       currentUser,
       createUser,
       logoutUser,
-      loginUser
+      loginUser,
+      editUser
     }}>
       {children}
     </UserContext.Provider>

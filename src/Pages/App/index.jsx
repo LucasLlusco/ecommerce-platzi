@@ -12,6 +12,7 @@ import './App.css'
 import SignUp from '../SignUp'
 import { AuthContextProvider, useAuthContext } from '../../Context/authContext'
 import ProtectedRoute from '../../Components/ProtectedRoute'
+import EditProfile from '../EditProfile'
 
 const AppRoutes = () => {
   const { currentUser } = useAuthContext();
@@ -25,6 +26,7 @@ const AppRoutes = () => {
     { path: '/toys', element: <ProtectedRoute><Home/></ProtectedRoute>  },
     { path: '/others', element: <ProtectedRoute><Home/></ProtectedRoute> },
     { path: '/my-account', element: <ProtectedRoute><MyAccount/></ProtectedRoute>},
+    { path: '/my-account/edit', element: <ProtectedRoute><EditProfile/></ProtectedRoute>},
     { path: '/my-order', element: <ProtectedRoute><MyOrder/></ProtectedRoute> },
     { path: '/my-orders', element: <ProtectedRoute><MyOrders/></ProtectedRoute>  },
     { path: '/my-orders/last', element: <ProtectedRoute><MyOrder/></ProtectedRoute> },

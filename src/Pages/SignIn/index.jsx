@@ -7,12 +7,12 @@ const SignIn = () => {
   const { loginUser } = useAuthContext();
 
   const [newUser, setNewUser] = useState({
-    name: "",
+    email: "",
     password: "",
   });
 
-  const handleName = (e) => {
-    setNewUser({...newUser, name: e.target.value});
+  const handleEmail = (e) => {
+    setNewUser({...newUser, email: e.target.value});
   }
 
   const handlePassword = (e) => {
@@ -21,8 +21,8 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(newUser.name && newUser.password) {
-      loginUser(newUser.name, newUser.password);
+    if(newUser.email && newUser.password) {
+      loginUser(newUser.email, newUser.password);
     }
   }
 
@@ -35,10 +35,10 @@ const SignIn = () => {
       <div className='flex flex-col w-full sm:w-80 px-2'>
         <form onSubmit={handleSubmit}>
           <input 
-            type="text" 
-            placeholder='name'
-            value={newUser.name} 
-            onChange={handleName} 
+            type="email" 
+            placeholder='email'
+            value={newUser.email} 
+            onChange={handleEmail} 
             className='w-full rounded-lg border border-black p-2 mb-4 focus:outline-none'
           />
 
@@ -49,7 +49,12 @@ const SignIn = () => {
             onChange={handlePassword} 
             className='w-full rounded-lg border border-black p-2 mb-4 focus:outline-none'            
           />        
-          <button className='bg-black py-3 text-white w-full rounded-lg'>Sign In!</button>
+          <button 
+            disabled={!newUser.email || !newUser.password}
+            className='bg-black py-3 text-white w-full rounded-lg disabled:opacity-25'
+            >
+            Sign In!
+          </button>
           <p className='text-center mt-4'>Don’t have an account yet? <Link className='underline' to={"/sign-up"}>sign up here.</Link></p>
         </form>
       </div>    

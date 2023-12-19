@@ -1,7 +1,7 @@
 <h1 align="center">E-commerce con React.js</h1>
 
 <div align="left">
-  Proyecto hecho por el curso <a href="https://platzi.com/cursos/laboratorio-react/">Prueba Técnica: E-commerce Profesional con React.js</a> de Platzi el cual consiste en resolver varios issues de un e-commerce ya creado.
+  Proyecto hecho en el curso <a href="https://platzi.com/cursos/laboratorio-react/">Prueba Técnica: E-commerce Profesional con React.js</a> de Platzi el cual consiste en resolver varios issues de un e-commerce ya creado.
 
   Acá los <a href="https://github.com/platzi/curso-react-practico/issues">issues</a> 
 </div>
